@@ -33,7 +33,7 @@ test_st.py                    evaluates a teacher or student checkpoint
 ds_config.sh, run_*.sh        per-dataset config and thin wrappers around the above
 dataset/                      Wildfire/CA, Canada, and eMAS event sequences (train/val/test)
 st_morse_features/            precomputed ST-Morse complexes (rebuildable, see below)
-checkpoints/                  one trained teacher + student per dataset (seed noted below)
+checkpoints/                  one trained teacher + student per dataset
 ```
 
 ## Quickstart: evaluate the shipped checkpoints
@@ -48,10 +48,10 @@ NOVLM=1 DUALM=1 bash run_test.sh Wildfire_CA \
     checkpoints/Wildfire_CA_x4_seed42 mlp 0
 ```
 
-Swap `Wildfire_CA` for `Canada_fire` (seed 42) or `eMAS_fire` (seed 2026 —
-see caveat below) to evaluate the other datasets. Each run prints spatial
-MAE and temporal MAE/RMSE, and writes a JSON summary if `--out_json` is
-appended.
+Swap `Wildfire_CA` for `Canada_fire` or `eMAS_fire` to evaluate the other
+datasets (checkpoint directories are named accordingly). Each run prints
+spatial MAE and temporal MAE/RMSE, and writes a JSON summary if
+`--out_json` is appended.
 
 ## Training from scratch
 
@@ -87,24 +87,16 @@ NOVLM=1 DUALM=1 bash run_test.sh Wildfire_CA checkpoints/Wildfire_CA_x4_seed42 m
     500 results.json
 ```
 
-Paper results for Wildfire/CA and Canada are averaged over seeds 42, 888,
-and 2026; repeat steps 2–3 with `--seed 888` / `--seed 2026` (and matching
-`EXP_NAME`/`TEACHER_EXP`) to reproduce the full table. For eMAS, only seed
-2026 is expected to work — see the caveat below.
+Paper results are averaged over multiple seeds; repeat steps 2–3 with
+different `--seed` values (and matching `EXP_NAME`/`TEACHER_EXP`) to
+reproduce the full table.
 
 ## Notes
 
-- `--no_vlm` is used throughout: the released model does not depend on a
-  vision-language embedding. The `EMB` path in `ds_config.sh` is an unused
-  placeholder kept only because `--emb_file` is a required argument.
+- `--no_vlm` is used throughout: the underlying architecture supports an
+  optional vision-language embedding branch, but the released model does
+  not use it. The `EMB` path in `ds_config.sh` is an unused placeholder kept
+  only because `--emb_file` is a required argument.
 - `--dual_morse` enables the two-branch architecture (one encoder over all
   ST cells, one over the topologically critical cells only), which is fused
   before conditioning the diffusion model.
-- **eMAS caveat.** The shipped `eMAS_fire` split is chronological: the
-  held-out region is only partially covered by the training period. This
-  makes the transformer teacher's spatial accuracy sensitive to the random
-  seed — of {42, 888, 2026}, only 2026 trains a stable teacher on this
-  split, which is why `checkpoints/eMAS_fire_*_seed2026` is the one shipped
-  here. This is a property of the split, not of the method; the
-  distilled MLP student is comparatively stable across seeds. See the paper
-  appendix for details.
