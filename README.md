@@ -4,11 +4,9 @@ Code for distilling a transformer-based spatio-temporal point process model
 into a lightweight MLP, using a unified spatio-temporal discrete-Morse
 structure to guide the distillation. This release ships three datasets:
 
-- **Wildfire/CA** — per-state cut of a
-  [Kaggle US wildfire panel](https://www.kaggle.com/datasets/firecastrl/us-wildfire-dataset).
-- **Canada** — 2023 wildfire hotspots, a
-  [Kaggle mirror](https://www.kaggle.com/datasets/brsdincer/canada-wildfire-2023-hotspot-data)
-  of NASA FIRMS satellite hotspot detections.
+- **Wildfire/CA** — per-state cut of a Kaggle US wildfire panel.
+- **Canada** — 2023 wildfire hotspots, a Kaggle mirror of NASA FIRMS
+  satellite hotspot detections.
 - **eMAS** — NASA eMAS (enhanced MODIS Airborne Simulator) fire detections.
 
 ## Setup
