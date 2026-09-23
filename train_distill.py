@@ -498,7 +498,7 @@ if __name__ == '__main__':
                   {"params": head_params,        "lr": opt.lr / 10}]
     optimizer = AdamW(groups, betas=(0.9, 0.99))
 
-    model_path = f'./models/{opt.dataset}_{opt.exp_name}_seed{opt.seed}/'
+    model_path = f'./checkpoints/{opt.dataset}_{opt.exp_name}_seed{opt.seed}/'
     os.makedirs(model_path, exist_ok=True)
     writer = SummaryWriter(log_dir=f'./logs/{opt.dataset}_{opt.exp_name}_seed{opt.seed}', flush_secs=5)
 

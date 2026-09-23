@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 .DS_Store
+logs/
+checkpoints/*_smoketest_*/

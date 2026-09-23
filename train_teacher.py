@@ -246,7 +246,7 @@ if __name__ == '__main__':
           + (f'  |  dual_morse: all={n_cells} crit={crit_features.shape[0] - 1}'
              if opt.dual_morse else ''))
 
-    model_path = f'./models/{opt.dataset}_{opt.exp_name}_seed{opt.seed}/'
+    model_path = f'./checkpoints/{opt.dataset}_{opt.exp_name}_seed{opt.seed}/'
     os.makedirs(model_path, exist_ok=True)
     writer = SummaryWriter(log_dir=f'./logs/{opt.dataset}_{opt.exp_name}_seed{opt.seed}', flush_secs=5)
 

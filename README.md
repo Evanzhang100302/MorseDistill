@@ -87,9 +87,10 @@ NOVLM=1 DUALM=1 bash run_test.sh Wildfire_CA checkpoints/Wildfire_CA_x4_seed42 m
     500 results.json
 ```
 
-Paper results are averaged over seeds 42, 888, and 2026; repeat steps 2–3
-with `--seed 888` / `--seed 2026` (and matching `EXP_NAME`/`TEACHER_EXP`) to
-reproduce the full table.
+Paper results for Wildfire/CA and Canada are averaged over seeds 42, 888,
+and 2026; repeat steps 2–3 with `--seed 888` / `--seed 2026` (and matching
+`EXP_NAME`/`TEACHER_EXP`) to reproduce the full table. For eMAS, only seed
+2026 is expected to work — see the caveat below.
 
 ## Notes
 
