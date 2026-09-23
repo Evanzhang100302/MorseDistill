@@ -5,15 +5,11 @@ into a lightweight MLP, using a unified spatio-temporal discrete-Morse
 structure to guide the distillation. This release ships three datasets:
 
 - **Wildfire/CA** — per-state cut of a
-  [Kaggle US wildfire panel](https://www.kaggle.com/) (real, non-uniform
-  acquisition timestamps).
+  [Kaggle US wildfire panel](https://www.kaggle.com/datasets/firecastrl/us-wildfire-dataset).
 - **Canada** — 2023 wildfire hotspots, a
   [Kaggle mirror](https://www.kaggle.com/datasets/brsdincer/canada-wildfire-2023-hotspot-data)
-  of NASA FIRMS satellite hotspot detections (real acquisition timestamps).
+  of NASA FIRMS satellite hotspot detections.
 - **eMAS** — NASA eMAS (enhanced MODIS Airborne Simulator) fire detections.
-  See the caveat below: the shipped checkpoint uses seed 2026, the only one
-  of {42, 888, 2026} that trains a stable teacher on this dataset's
-  chronological split.
 
 ## Setup
 
