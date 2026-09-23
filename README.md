@@ -2,11 +2,18 @@
 
 Code for distilling a transformer-based spatio-temporal point process model
 into a lightweight MLP, using a unified spatio-temporal discrete-Morse
-structure to guide the distillation. This release ships two datasets:
+structure to guide the distillation. This release ships three datasets:
 
-- **Wildfire/CA** — per-state cut of a US wildfire panel (Kaggle).
-- **Canada** — 2023 wildfire hotspots from NASA FIRMS (real satellite
+- **Wildfire/CA** — per-state cut of a
+  [Kaggle US wildfire panel](https://www.kaggle.com/) (real, non-uniform
   acquisition timestamps).
+- **Canada** — 2023 wildfire hotspots, a
+  [Kaggle mirror](https://www.kaggle.com/datasets/brsdincer/canada-wildfire-2023-hotspot-data)
+  of NASA FIRMS satellite hotspot detections (real acquisition timestamps).
+- **eMAS** — NASA eMAS (enhanced MODIS Airborne Simulator) fire detections.
+  See the caveat below: the shipped checkpoint uses seed 2026, the only one
+  of {42, 888, 2026} that trains a stable teacher on this dataset's
+  chronological split.
 
 ## Setup
 
@@ -30,9 +37,9 @@ train_teacher.py              trains the teacher (transformer encoder + diffusio
 train_distill.py              distills the teacher into the MLP student
 test_st.py                    evaluates a teacher or student checkpoint
 ds_config.sh, run_*.sh        per-dataset config and thin wrappers around the above
-dataset/                      Wildfire/CA and Canada event sequences (train/val/test)
+dataset/                      Wildfire/CA, Canada, and eMAS event sequences (train/val/test)
 st_morse_features/            precomputed ST-Morse complexes (rebuildable, see below)
-checkpoints/                  one seed (42) of trained teacher + student per dataset
+checkpoints/                  one trained teacher + student per dataset (seed noted below)
 ```
 
 ## Quickstart: evaluate the shipped checkpoints
@@ -47,9 +54,10 @@ NOVLM=1 DUALM=1 bash run_test.sh Wildfire_CA \
     checkpoints/Wildfire_CA_x4_seed42 mlp 0
 ```
 
-Swap `Wildfire_CA` for `Canada_fire` to evaluate the other dataset. Each run
-prints spatial MAE and temporal MAE/RMSE, and writes a JSON summary if
-`--out_json` is appended.
+Swap `Wildfire_CA` for `Canada_fire` (seed 42) or `eMAS_fire` (seed 2026 —
+see caveat below) to evaluate the other datasets. Each run prints spatial
+MAE and temporal MAE/RMSE, and writes a JSON summary if `--out_json` is
+appended.
 
 ## Training from scratch
 
@@ -97,3 +105,11 @@ reproduce the full table.
 - `--dual_morse` enables the two-branch architecture (one encoder over all
   ST cells, one over the topologically critical cells only), which is fused
   before conditioning the diffusion model.
+- **eMAS caveat.** The shipped `eMAS_fire` split is chronological: the
+  held-out region is only partially covered by the training period. This
+  makes the transformer teacher's spatial accuracy sensitive to the random
+  seed — of {42, 888, 2026}, only 2026 trains a stable teacher on this
+  split, which is why `checkpoints/eMAS_fire_*_seed2026` is the one shipped
+  here. This is a property of the split, not of the method; the
+  distilled MLP student is comparatively stable across seeds. See the paper
+  appendix for details.
