@@ -522,7 +522,7 @@ class Model_all_MM(nn.Module):
         self.transformer   = transformer
         self.diffusion     = diffusion
         self.img_projector = img_projector
-        # MCL projection heads: 把 history 和 image embedding 映射到同一对比学习空间
+        # MCL projection heads: map history and image embeddings into a shared contrastive space
         self.hist_proj = nn.Sequential(
             nn.Linear(64, proj_dim), nn.ReLU(), nn.Linear(proj_dim, proj_dim))
         self.img_proj_mcl = nn.Sequential(
