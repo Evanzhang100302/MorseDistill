@@ -75,7 +75,7 @@ def get_args():
                    help='apply L_cnodes_Y only to samples with t < tmax*T; x0_hat is '
                         'unreliable near t=T where 1/sqrt(alpha_bar_t) blows up')
     p.add_argument('--alpha',         type=float, default=0.05)
-    p.add_argument('--beta_topo_st',  type=float, default=0.001)
+    p.add_argument('--beta_topo_st',  type=float, default=0.0)
     p.add_argument('--topo_w_time',   type=float, default=-1.0)
     p.add_argument('--no_kd',         action='store_true', help='ablation: train the MLP from scratch')
     p.add_argument('--dim_weight',    action='store_true',

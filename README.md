@@ -72,11 +72,11 @@ EXP_NAME=teacher_dual bash run_teacher.sh Wildfire_CA 0 42 100 --no_vlm --dual_m
 ### 3. Distill the student
 
 The reported configuration (`--dual_morse`, no VLM branch, λ_pred=0.1,
-λ_feat=5.0, λ_Morse-pred=0.1, λ_Morse-feat=0.1, β_topo=0.001):
+λ_feat=5.0, λ_Morse-pred=0.1, λ_Morse-feat=0.1):
 
 ```bash
 EXP_NAME=x4 TEACHER_EXP=teacher_dual bash run_student.sh Wildfire_CA 0 42 100 16 \
-    --no_vlm --dual_morse --alpha 0 --beta_topo_st 0.001 \
+    --no_vlm --dual_morse --alpha 0 --beta_topo_st 0 \
     --lambda_out 0.1 --lambda_cond 5.0 --lambda_mpred 0.1 --lambda_mfeat 0.1
 ```
 

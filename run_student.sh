@@ -4,7 +4,7 @@
 #
 # To reproduce the paper's reported model (MorseDistill / "x4" configuration),
 # pass:
-#   --no_vlm --dual_morse --alpha 0 --beta_topo_st 0.001 \
+#   --no_vlm --dual_morse --alpha 0 --beta_topo_st 0 \
 #   --lambda_out 0.1 --lambda_cond 5.0 --lambda_mpred 0.1 --lambda_mfeat 0.1
 # and set TEACHER_EXP to match the --exp_name used for run_teacher.sh (the
 # teacher must also have been trained with --no_vlm --dual_morse).
@@ -22,6 +22,6 @@ $PY train_distill.py \
   --total_epochs "$EP" --warmup_cond_epochs 5 --window "$W" \
   --timesteps 500 --samplingsteps 500 \
   --lambda_out 1.0 --lambda_cond 1.0 --lambda_fuse 0.5 \
-  --alpha 0.05 --beta_topo_st 0.001 \
+  --alpha 0.05 --beta_topo_st 0 \
   --max_val_seqs 200 --eval_every 10 \
   --cuda_id "$GPU" --seed "$SEED" --exp_name "$EXP" "$@"

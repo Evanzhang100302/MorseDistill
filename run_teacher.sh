@@ -15,6 +15,6 @@ ds_config "$DS" || exit 1
 $PY train_teacher.py \
   --dataset "$DS" --zoom "$VZ" --emb_file "$EMB" --st_morse_file "$STF" \
   --total_epochs "$EP" --timesteps 500 --samplingsteps 500 \
-  --alpha 0.05 --beta_topo_st 0.001 \
+  --alpha 0.05 --beta_topo_st 0 \
   --max_val_seqs 200 --eval_every 10 \
   --cuda_id "$GPU" --seed "$SEED" --exp_name "${EXP_NAME:-teacher}" "$@"

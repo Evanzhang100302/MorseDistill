@@ -33,7 +33,7 @@ def get_args():
     p.add_argument('--dataset',       type=str, default='eMAS_smoke')
     p.add_argument('--total_epochs',  type=int, default=100)
     p.add_argument('--alpha',         type=float, default=0.05,  help='MCL loss weight')
-    p.add_argument('--beta_topo_st',  type=float, default=0.001, help='unified ST topo loss weight')
+    p.add_argument('--beta_topo_st',  type=float, default=0.0, help='unified ST topo loss weight')
     p.add_argument('--topo_w_time',   type=float, default=-1.0,
                    help='temporal anisotropy in the topo loss; <0 uses the value stored in the feature file')
     p.add_argument('--batch_size',    type=int, default=64)
