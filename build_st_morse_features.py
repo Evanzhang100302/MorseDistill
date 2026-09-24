@@ -11,7 +11,7 @@ Replaces build_morse_features.py (spatial only, keyed on VLM tile embeddings)
 and the per-sequence temporal Morse computed inside the old training loop.
 
 Usage:
-  python build_st_morse_features.py --dataset eMAS_smoke --zoom 7 \
+  python build_st_morse_features.py --dataset Wildfire_CA --zoom 8 \
       --n_bins 16 --k 5 --w_time 1.0
 """
 import argparse

@@ -2,12 +2,11 @@
 
 Code for distilling a transformer-based spatio-temporal point process model
 into a lightweight MLP, using a unified spatio-temporal discrete-Morse
-structure to guide the distillation. This release ships three datasets:
+structure to guide the distillation. This release ships two datasets:
 
 - **Wildfire/CA** — per-state cut of a Kaggle US wildfire panel.
 - **Canada** — 2023 wildfire hotspots, a Kaggle mirror of NASA FIRMS
   satellite hotspot detections.
-- **eMAS** — NASA eMAS (enhanced MODIS Airborne Simulator) fire detections.
 
 ## Setup
 
@@ -31,7 +30,7 @@ train_teacher.py              trains the teacher (transformer encoder + diffusio
 train_distill.py              distills the teacher into the MLP student
 test_st.py                    evaluates a teacher or student checkpoint
 ds_config.sh, run_*.sh        per-dataset config and thin wrappers around the above
-dataset/                      Wildfire/CA, Canada, and eMAS event sequences (train/val/test)
+dataset/                      Wildfire/CA and Canada event sequences (train/val/test)
 st_morse_features/            precomputed ST-Morse complexes (rebuildable, see below)
 checkpoints/                  one trained teacher + student per dataset
 ```
@@ -48,8 +47,8 @@ NOVLM=1 DUALM=1 bash run_test.sh Wildfire_CA \
     checkpoints/Wildfire_CA_x4_seed42 mlp 0
 ```
 
-Swap `Wildfire_CA` for `Canada_fire` or `eMAS_fire` to evaluate the other
-datasets (checkpoint directories are named accordingly). Each run prints
+Swap `Wildfire_CA` for `Canada_fire` to evaluate the other dataset
+(checkpoint directories are named accordingly). Each run prints
 spatial MAE and temporal MAE/RMSE, and writes a JSON summary if
 `--out_json` is appended.
 

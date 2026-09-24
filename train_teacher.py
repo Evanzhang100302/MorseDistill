@@ -30,7 +30,7 @@ from st_morse import lat_lon_to_tile, dt_bin
 def get_args():
     p = argparse.ArgumentParser()
     p.add_argument('--seed',          type=int, default=1234)
-    p.add_argument('--dataset',       type=str, default='eMAS_smoke')
+    p.add_argument('--dataset',       type=str, default='Wildfire_CA')
     p.add_argument('--total_epochs',  type=int, default=100)
     p.add_argument('--alpha',         type=float, default=0.05,  help='MCL loss weight')
     p.add_argument('--beta_topo_st',  type=float, default=0.0, help='unified ST topo loss weight')
